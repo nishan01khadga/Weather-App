@@ -1,8 +1,9 @@
 class WeatherModel {
   Location? _location;
   Current? _current;
+  double ? tempC;
 
-  WeatherModel({Location? location, Current? current}) {
+  WeatherModel({Location? location, Current? current,required this.tempC}) {
     if (location != null) {
       this._location = location;
     }
@@ -16,13 +17,14 @@ class WeatherModel {
   Current? get current => _current;
   set current(Current? current) => _current = current;
 
-  WeatherModel.fromJson(Map<String, dynamic> json) {
-    _location = json['location'] != null
+  WeatherModel.fromJson(Map<String, dynamic> json)
+      :tempC = (json['current']['temp_c'] as num).toDouble(),
+      _location = json['location'] != null
         ? new Location.fromJson(json['location'])
-        : null;
-    _current =
-    json['current'] != null ? new Current.fromJson(json['current']) : null;
-  }
+        : null,
+        _current =
+        json['current'] != null ? new Current.fromJson(json['current']) : null;
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

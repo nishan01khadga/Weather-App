@@ -32,7 +32,7 @@ class WeatherBloc extends Bloc<WeatherEvent,WeatherState>{
         emit(WeatherLoadingFailureState('Unknown error ${response.statusCode}'));
       }
     }catch(error){
-      emit(WeatherLoadingFailureState('Unable to featch weather data'));
+      emit(WeatherLoadingFailureState('Unable to fetch weather data'));
 
       debugPrint("_fetchWeatherDataError:$error");
     }
